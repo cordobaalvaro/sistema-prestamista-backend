@@ -241,7 +241,7 @@ const renovarTokenBD = async (tokenViejo) => {
         rolUsuario: payload.rolUsuario,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "10s" }
     );
     return {
       status: 200,
