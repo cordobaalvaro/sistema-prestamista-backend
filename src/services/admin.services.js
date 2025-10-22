@@ -1,5 +1,5 @@
 const PrestamoModel = require("../models/prestamo.model");
-const TablaCobroModel = require("../models/TablaCobro.model");
+const TablaCobroModel = require("../models/tablaCobro.model");
 const UsuarioModel = require("../models/usuario.model");
 const { crearNotificacion } = require("./notificaciones.services");
 

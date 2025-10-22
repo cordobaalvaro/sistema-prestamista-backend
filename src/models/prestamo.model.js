@@ -62,6 +62,21 @@ const prestamoSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
       required: true,
+      validate: {
+        validator: function (v) {
+          if (!v) return true;
+          const d = new Date(v);
+          const today = new Date();
+          const startOfToday = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate()
+          );
+          const startOfV = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+          return startOfV.getTime() >= startOfToday.getTime();
+        },
+        message: "La fecha de inicio no puede ser anterior a hoy",
+      },
     },
     fechaVencimiento: {
       type: Date,

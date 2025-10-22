@@ -2,7 +2,7 @@ const PrestamoModel = require("../models/prestamo.model");
 const ClienteModel = require("../models/cliente.model");
 const ZonaModel = require("../models/zona.model");
 const UsuarioModel = require("../models/usuario.model");
-const TablaCobroModel = require("../models/TablaCobro.model");
+const TablaCobroModel = require("../models/tablaCobro.model");
 
 const obtenerMisZonasBD = async (cobradorId) => {
   try {

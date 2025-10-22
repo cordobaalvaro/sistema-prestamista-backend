@@ -67,11 +67,11 @@ const tablaCobroSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // createdAt, updatedAt automáticos
+    timestamps: true, 
   }
 );
 
-// Middleware para calcular automáticamente totalCobrado y cantidadCobros
+
 tablaCobroSchema.pre("save", async function (next) {
   if (this.isNew && this.numero == null) {
     const counter = await CounterModel.findByIdAndUpdate(
@@ -83,12 +83,12 @@ tablaCobroSchema.pre("save", async function (next) {
   }
 
   if (this.listaTabla && this.listaTabla.length > 0) {
-    // Calcular total cobrado sumando todos los montos
+    
     this.totalCobrado = this.listaTabla.reduce((total, item) => {
       return total + (item.monto || 0);
     }, 0);
 
-    // Calcular cantidad de cobros
+    
     this.cantidadCobros = this.listaTabla.length;
   } else {
     this.totalCobrado = 0;
@@ -97,7 +97,7 @@ tablaCobroSchema.pre("save", async function (next) {
   next();
 });
 
-// Middleware para findOneAndUpdate también
+
 tablaCobroSchema.pre(["findOneAndUpdate", "updateOne"], async function (next) {
   const update = this.getUpdate();
 
@@ -106,7 +106,7 @@ tablaCobroSchema.pre(["findOneAndUpdate", "updateOne"], async function (next) {
     update.$push?.listaTabla ||
     update.$pull?.listaTabla
   ) {
-    // Si se está actualizando la listaTabla, necesitamos recalcular
+    
     const doc = await this.model.findOne(this.getQuery());
     if (doc) {
       let listaActualizada = doc.listaTabla;
