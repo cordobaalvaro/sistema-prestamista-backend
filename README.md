@@ -1,4 +1,4 @@
-# Backend - Activa Cred
+# Backend
 
 Node.js + Express + MongoDB backend para gestión de clientes, préstamos, zonas, cobradores y tablas de cobro.
 
