@@ -6,7 +6,6 @@ const {
   actualizarUsuario,
   eliminarUsuario,
   loginUsuario,
-  renovarToken,
 } = require("../controllers/usuarios.controllers");
 const auth = require("../middlewares/auth");
 const router = express.Router();

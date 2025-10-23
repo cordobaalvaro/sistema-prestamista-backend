@@ -5,7 +5,6 @@ const {
   actualizarUsuarioBD,
   eliminarUsuarioBD,
   loginUsuarioBD,
-  renovarTokenBD,
 } = require("../services/usuarios.services");
 
 const crearUsuario = async (req, res) => {
