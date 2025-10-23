@@ -33,7 +33,6 @@ const crearDocumentoClienteBD = async (clienteId, nombre) => {
       data: documento,
     };
   } catch (error) {
-    console.log(error);
     return {
       status: 500,
       msg: "Error al crear el documento: " + error.message,
@@ -60,7 +59,6 @@ const subirImagenDocumentoClienteBD = async (documentoId, file) => {
       data: documento,
     };
   } catch (error) {
-    console.log(error);
     return {
       status: 500,
       msg: "Error al subir la imagen: " + error.message,
@@ -90,7 +88,6 @@ const eliminarDocumentoClienteBD = async (documentoId) => {
       data: documento,
     };
   } catch (error) {
-    console.log(error);
     return {
       status: 500,
       msg: "Error al eliminar el documento: " + error.message,

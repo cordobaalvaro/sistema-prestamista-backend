@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const CounterModel = require("./counter.model");
 
-// Eliminado el esquema cobros y la propiedad cobros de cuotaSchema
-
 const cuotaSchema = new mongoose.Schema({
   numero: {
     type: Number,
@@ -65,6 +63,7 @@ const prestamoSchema = new mongoose.Schema(
       validate: {
         validator: function (v) {
           if (!v) return true;
+          if (!this.isNew && !this.isModified("fechaInicio")) return true;
           const d = new Date(v);
           const today = new Date();
           const startOfToday = new Date(
@@ -158,15 +157,12 @@ const prestamoSchema = new mongoose.Schema(
   }
 );
 
-// Middleware pre-save para establecer saldoPendiente igual a montoTotal al crear
 prestamoSchema.pre("save", async function (next) {
   if (this.isNew && this.numero == null) {
-    // Verificar si existen préstamos
     const PrestamoModel = mongoose.model("Prestamo");
     const totalPrestamos = await PrestamoModel.countDocuments();
 
     if (totalPrestamos === 0) {
-      // Si no hay préstamos, resetear el contador y empezar desde 1
       await CounterModel.findByIdAndUpdate(
         { _id: "prestamo" },
         { $set: { seq: 1 } },
@@ -174,14 +170,12 @@ prestamoSchema.pre("save", async function (next) {
       );
       this.numero = 1;
     } else {
-      // Si hay préstamos, obtener el número máximo existente y sumar 1
       const ultimoPrestamo = await PrestamoModel.findOne(
         {},
         { numero: 1 }
       ).sort({ numero: -1 });
       const siguienteNumero = (ultimoPrestamo?.numero || 0) + 1;
 
-      // Actualizar el contador para mantener consistencia
       await CounterModel.findByIdAndUpdate(
         { _id: "prestamo" },
         { $set: { seq: siguienteNumero } },
@@ -190,7 +184,6 @@ prestamoSchema.pre("save", async function (next) {
       this.numero = siguienteNumero;
     }
   }
-  // Solo aplicar cuando es un documento nuevo (creación) o cuando saldoPendiente es undefined
   if ((this.isNew || this.saldoPendiente === undefined) && this.montoTotal) {
     this.saldoPendiente = this.montoTotal;
   }

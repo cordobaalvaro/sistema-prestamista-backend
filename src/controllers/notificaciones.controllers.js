@@ -15,7 +15,6 @@ const listar = async (req, res) => {
     });
     res.json(data);
   } catch (e) {
-    console.error(e);
     res.status(500).json({ message: "Error listando notificaciones" });
   }
 };
@@ -26,7 +25,6 @@ const crear = async (req, res) => {
     if (!notif) return res.status(400).json({ message: "No se pudo crear" });
     res.status(201).json(notif);
   } catch (e) {
-    console.error(e);
     res.status(500).json({ message: "Error creando notificación" });
   }
 };
@@ -38,7 +36,6 @@ const marcar = async (req, res) => {
     if (!updated) return res.status(404).json({ message: "No encontrada" });
     res.json(updated);
   } catch (e) {
-    console.error(e);
     res.status(500).json({ message: "Error marcando notificación" });
   }
 };
@@ -48,7 +45,6 @@ const marcarTodas = async (_req, res) => {
     await marcarTodasLeidas();
     res.json({ ok: true });
   } catch (e) {
-    console.error(e);
     res.status(500).json({ message: "Error marcando todas" });
   }
 };

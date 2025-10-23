@@ -33,6 +33,10 @@ const usuarioSchema = new mongoose.Schema({
     enum: ["cobrador", "admin"],
     required: true,
   },
+  tokenVersion: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const UsuarioModel = mongoose.model("Usuario", usuarioSchema);

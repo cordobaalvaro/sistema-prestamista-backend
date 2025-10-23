@@ -232,31 +232,7 @@ const loginUsuarioBD = async ({ usuarioLogin, contraseña }) => {
   }
 };
 
-const renovarTokenBD = async (tokenViejo) => {
-  try {
-    const payload = jwt.verify(tokenViejo, process.env.JWT_SECRET);
-    const nuevoToken = jwt.sign(
-      {
-        idUsuario: payload.idUsuario,
-        rolUsuario: payload.rolUsuario,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "10s" }
-    );
-    return {
-      status: 200,
-      msg: "Token renovado",
-      token: nuevoToken,
-      data: null,
-    };
-  } catch (error) {
-    return {
-      status: 401,
-      msg: "Token inválido o expirado",
-      data: null,
-    };
-  }
-};
+ 
 
 module.exports = {
   crearUsuarioBD,
@@ -265,5 +241,4 @@ module.exports = {
   actualizarUsuarioBD,
   eliminarUsuarioBD,
   loginUsuarioBD,
-  renovarTokenBD,
 };

@@ -103,9 +103,7 @@ const procesarCobroBD = async (
             await tablaItem.save();
           }
         }
-      } catch (tablaError) {
-        console.error("Error al actualizar tabla de cobro:", tablaError);
-      }
+      } catch (tablaError) {}
     }
 
     const fechaRegistro = fechaPago ? new Date(fechaPago) : new Date();
@@ -174,7 +172,6 @@ const procesarCobroBD = async (
       },
     };
   } catch (error) {
-    console.error("Error al procesar cobro:", error);
     return {
       status: 500,
       msg: "Error interno al procesar el cobro",
@@ -278,7 +275,6 @@ const eliminarCobroBD = async (prestamoId, cobroId) => {
       },
     };
   } catch (error) {
-    console.error("Error al eliminar cobro:", error);
     return {
       status: 500,
       msg: "Error interno al eliminar el cobro",
@@ -384,7 +380,6 @@ const editarRegistroCobroBD = async (
       },
     };
   } catch (error) {
-    console.error("Error al editar registro de cobro:", error);
     return {
       status: 500,
       msg: "Error interno al editar el registro de cobro",
@@ -482,7 +477,6 @@ const eliminarRegistroCobroBD = async (prestamoId, registroId) => {
       },
     };
   } catch (error) {
-    console.error("Error al eliminar registro de cobro:", error);
     return {
       status: 500,
       msg: "Error interno al eliminar el registro de cobro",
@@ -602,7 +596,6 @@ const obtenerTablasEnviadas = async (adminId, filtros = {}) => {
       },
     };
   } catch (error) {
-    console.error("Error al obtener tablas enviadas:", error);
     return {
       status: 500,
       msg: "Error interno al obtener tablas enviadas",
@@ -647,7 +640,6 @@ const editarTablaCobroAdmin = async (tablaId, body, adminId) => {
       data: tabla,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al editar tabla de cobros",
@@ -802,7 +794,6 @@ const editarItemTablaCobroAdmin = async (
       data: tablaActualizada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al editar item de la tabla",
@@ -865,7 +856,6 @@ const eliminarItemTablaCobroAdmin = async (tablaId, itemId, adminId) => {
       data: tablaActualizada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al eliminar item de la tabla",
@@ -922,7 +912,6 @@ const eliminarTablaCobroAdmin = async (tablaId, adminId) => {
       data: { tablaEliminada: tablaId },
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al eliminar tabla de cobros",
@@ -1021,7 +1010,6 @@ const agregarItemTablaCobroAdmin = async (tablaId, itemData, adminId) => {
       data: tablaActualizada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al agregar item a la tabla",
@@ -1134,7 +1122,6 @@ const crearRegistroCobroBD = async (prestamoId, monto, fecha) => {
       },
     };
   } catch (error) {
-    console.error("Error al crear registro de cobro:", error);
     return {
       status: 500,
       msg: "Error interno al crear el registro de cobro",
@@ -1171,7 +1158,6 @@ const marcarComoVistoTablaBD = async (tablaId) => {
       data: tabla,
     };
   } catch (error) {
-    console.error("Error al marcar tabla como vista:", error);
     return {
       status: 500,
       msg: "Error interno al marcar tabla como vista",

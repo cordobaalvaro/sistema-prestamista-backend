@@ -143,7 +143,6 @@ const crearPrestamoBD = async (data) => {
       data: prestamoGuardado,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al crear el préstamo",
@@ -283,9 +282,8 @@ const actualizarPrestamos = async () => {
       await prestamo.save();
     }
 
-    console.log("✅ Prestamos actualizados con interés semanal y estado.");
   } catch (error) {
-    console.error("❌ Error actualizando préstamos:", error);
+    
   }
 };
 
@@ -316,7 +314,6 @@ const eliminarPrestamoBD = async (id) => {
       data: null,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al eliminar el préstamo",
@@ -443,7 +440,6 @@ const actualizarPrestamoBD = async (id, datos) => {
       data: prestamoActualizado,
     };
   } catch (error) {
-    console.log(error);
     return {
       status: 500,
       msg: "Error interno al actualizar el préstamo",
@@ -473,7 +469,6 @@ const desactivarPrestamoBD = async (id) => {
       data: prestamoActualizado,
     };
   } catch (error) {
-    console.error("Error al desactivar préstamo:", error);
     return {
       status: 500,
       msg: "Error interno al desactivar el préstamo",
@@ -519,7 +514,6 @@ const activarPrestamoBD = async (id) => {
       data: prestamoActualizado,
     };
   } catch (error) {
-    console.error("Error al activar préstamo:", error);
     return {
       status: 500,
       msg: "Error interno al activar el préstamo",
@@ -540,7 +534,6 @@ const obtenerTodosLosPrestamosBD = async () => {
       data: prestamos,
     };
   } catch (error) {
-    console.error("Error al obtener todos los préstamos:", error);
     return {
       status: 500,
       msg: "Error interno al obtener los préstamos",

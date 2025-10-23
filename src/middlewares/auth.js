@@ -1,13 +1,37 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (...rolesRuta) => (req, res, next) => {
-  const token = req.header("auth");
-  const verificarToken = jwt.verify(token, process.env.JWT_SECRET);
+  try {
+    const authHeader = req.headers["authorization"] || "";
+    const bearerToken = authHeader.startsWith("Bearer ")
+      ? authHeader.slice(7)
+      : null;
+    const legacyToken = req.header("auth") || null;
+    const token = bearerToken || legacyToken;
 
-  if (rolesRuta.includes(verificarToken.rolUsuario)) {
-    req.idUsuario = verificarToken.idUsuario;
+    if (!token) {
+      return res.status(401).json({ msg: "Token no provisto" });
+    }
+
+    const payload = jwt.verify(
+      token,
+      process.env.JWT_ACCESS_SECRET || process.env.JWT_SECRET
+    );
+    // Permite formato: auth('admin','cobrador') o auth(['admin','cobrador'])
+    const roles =
+      rolesRuta.length === 1 && Array.isArray(rolesRuta[0])
+        ? rolesRuta[0]
+        : rolesRuta;
+    if (roles.length && !roles.includes(payload.rolUsuario)) {
+      return res
+        .status(403)
+        .json({ msg: "No estás autorizado para esta operación" });
+    }
+
+    req.idUsuario = payload.idUsuario;
+    req.rolUsuario = payload.rolUsuario;
     next();
-  } else {
-    res.status(401).json("No estas autorizado para recibir esta informacion");
+  } catch (err) {
+    return res.status(401).json({ msg: "Token inválido o expirado" });
   }
 };

@@ -1,12 +1,20 @@
 require("./src/db/config.db.js");
 const express = require("express");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
 require("./src/utils/prestamos.cron.js");
 app.use(express.json());
+app.use(cookieParser());
 
-app.use(cors());
+// CORS con credenciales para poder usar cookies HttpOnly desde el frontend
+app.use(
+  cors({
+    origin: true, // refleja el Origin del request
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 
 app.use("/api", require("./src/routes/index.routes"));

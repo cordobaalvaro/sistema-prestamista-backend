@@ -67,15 +67,6 @@ const loginUsuario = async (req, res) => {
   }
 };
 
-const renovarToken = async (req, res) => {
-  try {
-    const tokenViejo = req.header("auth");
-    const { status, msg, token } = await renovarTokenBD(tokenViejo);
-    res.status(status).json({ msg, token });
-  } catch (error) {
-    res.status(500).json({ msg: error.message, data: null });
-  }
-};
 
 module.exports = {
   crearUsuario,
@@ -84,5 +75,4 @@ module.exports = {
   actualizarUsuario,
   eliminarUsuario,
   loginUsuario,
-  renovarToken,
 };

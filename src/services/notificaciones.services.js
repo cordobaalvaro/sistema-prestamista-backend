@@ -17,7 +17,6 @@ const crearNotificacion = async ({
     });
     return notif;
   } catch (e) {
-    console.error("Error creando notificación", e);
     return null;
   }
 };

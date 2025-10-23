@@ -18,6 +18,5 @@ router.get("/:id", auth("admin"), obtenerUsuarioPorId);
 router.put("/:id", auth("admin"), actualizarUsuario);
 router.delete("/:id", auth("admin"), eliminarUsuario);
 router.post("/login", loginUsuario);
-router.post("/renovar-token", renovarToken);
 
 module.exports = router;

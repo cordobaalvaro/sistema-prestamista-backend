@@ -351,7 +351,6 @@ const añadirCobradorALaZona = async (zonaId, cobradorId) => {
       },
     };
   } catch (error) {
-    console.log(error);
     return {
       status: 500,
       msg: "Error al asignar cobrador a la zona: " + error.message,

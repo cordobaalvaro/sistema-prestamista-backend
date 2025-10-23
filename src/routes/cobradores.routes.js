@@ -23,7 +23,7 @@ router.post("/crear-tabla", auth("cobrador"), crearTabla);
 router.post("/tabla/:tablaId/agregar-item", auth("cobrador"), agregarItemTabla);
 
 router.get("/mis-tablas", auth("cobrador"), obtenerTablas);
-router.get("/tabla/:tablaId", auth(["cobrador", "admin"]), obtenerTablaPorID);
+router.get("/tabla/:tablaId", auth("cobrador", "admin"), obtenerTablaPorID);
 
 router.put("/tabla/:tablaId/editar", auth("cobrador"), editarTabla);
 

@@ -108,7 +108,6 @@ const obtenerMisZonasBD = async (cobradorId) => {
       data: zonasConEstadisticas,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al obtener zonas a cargo",
@@ -196,7 +195,6 @@ const crearTablaCobro = async (cobradorId, fecha = null, nombre = null) => {
       data: tablaGuardada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al crear tabla de cobros",
@@ -265,7 +263,6 @@ const agregarItemTablaCobro = async (tablaId, itemData) => {
       data: tablaActualizada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al agregar item a la tabla",
@@ -351,7 +348,6 @@ const obtenerMisTablas = async (cobradorId, filtros = {}) => {
       },
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al obtener tablas del cobrador",
@@ -392,7 +388,6 @@ const obtenerTablaPorIDBD = async (tablaId, cobradorId) => {
       data: tabla,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al obtener tabla de cobros",
@@ -451,7 +446,6 @@ const editarTablaCobro = async (tablaId, body, cobradorId) => {
       status: 200,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al editar tabla de cobros",
@@ -624,7 +618,6 @@ const editarItemTablaCobro = async (tablaId, itemId, datosItem, cobradorId) => {
       data: tablaActualizada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al editar item de la tabla",
@@ -694,7 +687,6 @@ const eliminarItemTablaCobro = async (tablaId, itemId, cobradorId) => {
       data: tablaActualizada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al eliminar item de la tabla",
@@ -757,7 +749,6 @@ const eliminarTablaCobro = async (tablaId, cobradorId) => {
       data: { tablaEliminada: tablaId },
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al eliminar tabla de cobros",
@@ -829,7 +820,6 @@ const enviarTablaCobro = async (tablaId, cobradorId, body) => {
       data: tablaActualizada,
     };
   } catch (error) {
-    console.error(error);
     return {
       status: 500,
       msg: "Error interno al enviar tabla de cobros",
@@ -987,7 +977,6 @@ const procesarCargaMasiva = async (cobradorId, tablaId, listaCobros) => {
           monto: parseFloat(monto),
         });
       } catch (itemError) {
-        console.error(`Error procesando item ${i + 1}:`, itemError);
         errores.push(`Item ${i + 1}: Error interno al procesar`);
       }
     }
@@ -1022,7 +1011,6 @@ const procesarCargaMasiva = async (cobradorId, tablaId, listaCobros) => {
       },
     };
   } catch (error) {
-    console.error("Error en carga masiva:", error);
     return {
       status: 500,
       msg: "Error interno al procesar carga masiva",

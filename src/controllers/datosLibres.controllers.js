@@ -11,7 +11,6 @@ exports.crear = async (req, res) => {
     const doc = await service.crearDato({ tabla, data });
     res.status(201).json(doc);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ message: "Error creando dato", error: err.message });
   }
 };
@@ -26,7 +25,6 @@ exports.listar = async (req, res) => {
     });
     res.json(result);
   } catch (err) {
-    console.error(err);
     res
       .status(500)
       .json({ message: "Error listando datos", error: err.message });
@@ -39,7 +37,6 @@ exports.obtener = async (req, res) => {
     if (!doc) return res.status(404).json({ message: "No encontrado" });
     res.json(doc);
   } catch (err) {
-    console.error(err);
     res
       .status(500)
       .json({ message: "Error obteniendo dato", error: err.message });
@@ -53,7 +50,6 @@ exports.actualizar = async (req, res) => {
     if (!doc) return res.status(404).json({ message: "No encontrado" });
     res.json(doc);
   } catch (err) {
-    console.error(err);
     res
       .status(500)
       .json({ message: "Error actualizando dato", error: err.message });
@@ -66,7 +62,6 @@ exports.eliminar = async (req, res) => {
     if (!doc) return res.status(404).json({ message: "No encontrado" });
     res.json({ message: "Eliminado", id: doc._id });
   } catch (err) {
-    console.error(err);
     res
       .status(500)
       .json({ message: "Error eliminando dato", error: err.message });
